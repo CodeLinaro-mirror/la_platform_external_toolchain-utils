@@ -23,10 +23,12 @@ The data provided is the commit message produced by `git log -n1 --format=%B`.
    GitHub across multiple lines (e.g., ending the first line with `… (#151424)`
    and continuing on subsequent lines), the PR number at the end of the first line
    still refers to the commit itself and must be excluded.
-4. Reland Rule: For a commit that is a reland or reapply, do NOT include the
-   SHAs or PR numbers of the original changes being relanded in `reverted_shas`
-   or `reverted_prs`. Only include the SHAs or PR numbers of the *revert* commits
-   if they are being undone.
+4. Reland Rule: Every reland or reapply implicitly undoes a prior revert, so if
+   `is_reland` is true, `is_revert` must also be true (even if the revert commit
+   is not explicitly mentioned). Do NOT include the SHAs or PR numbers of the
+   original changes being relanded in `reverted_shas` or `reverted_prs`. Only
+   include the SHAs or PR numbers of the *revert* commits if they are being
+   undone.
 5. Intent Rule: Do not extract PR numbers or SHAs that are mentioned as future
    goals, plans, or general context (e.g., "So that we can revert PR #12345").
    Only extract PRs and SHAs that are actually reverted by *this* commit.

@@ -8,8 +8,9 @@ changed file is one of:
 - llvm-libc-specific: Paths with `libc/` (including llvm-libc tests), or generic
   files where changes only affect llvm-libc.
 
-Android DOES care about tests for other targets and generic tests. If a commit
-touches tests outside of the exempt categories above, Android CARES
+Android DOES care about tests for non-exempt targets and generic features. If a
+commit touches tests outside of the exempt categories above (unless those test
+changes only exercise an exempt category), Android CARES
 (`android_doesnt_care: false`).
 
 If ANY changed file is NOT in the exempt categories above, Android CARES

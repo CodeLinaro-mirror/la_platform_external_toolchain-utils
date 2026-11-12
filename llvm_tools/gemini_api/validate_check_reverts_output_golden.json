@@ -927,6 +927,18 @@
       "reverted_shas": [
         "0844812b2e9d7f5ab005223443791c9287bcf5a2"
       ]
+    },
+    {
+      "android_doesnt_care": true,
+      "chromeos_doesnt_care": true,
+      "is_reland": true,
+      "is_revert": true,
+      "reverted_prs": [
+        150675
+      ],
+      "reverted_shas": [
+        "0844812b2e9d7f5ab005223443791c9287bcf5a2"
+      ]
     }
   ],
   "49ccf46adc455b64c2be0006092651182b1cb2c4": [
@@ -2307,9 +2319,7 @@
       "chromeos_doesnt_care": true,
       "is_reland": true,
       "is_revert": true,
-      "reverted_prs": [
-        189150
-      ],
+      "reverted_prs": [],
       "reverted_shas": []
     }
   ],
