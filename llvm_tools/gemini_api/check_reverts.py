@@ -571,6 +571,20 @@ def process_one_sha(
             android_doesnt_care=False,
         )
 
+    # Empty revert commits (e.g., duplicate reverts after another commit already
+    # reverted the change) touch zero files: every changed file is vacuously
+    # exempt, and passing an empty `Files:` list causes Gemini to burn tool
+    # calls probing `git_diff` for missing paths.
+    if not name_status.strip():
+        return GeminiRevertInference(
+            reverted_shas=classification.reverted_shas,
+            reverted_prs=classification.reverted_prs,
+            is_revert=classification.is_revert,
+            is_reland=classification.is_reland,
+            chromeos_doesnt_care=True,
+            android_doesnt_care=True,
+        )
+
     def git_diff(file_paths: list[str]) -> str:
         """Returns the git diff for `file_paths` in the current commit.
 
