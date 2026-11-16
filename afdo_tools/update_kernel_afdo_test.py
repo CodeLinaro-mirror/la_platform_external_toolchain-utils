@@ -207,7 +207,7 @@ class Test(unittest.TestCase):
         cfg_file.write_text(
             textwrap.dedent(
                 """
-                AMD_KVERS="5.4 5.10 6.6"
+                AMD_KVERS="5.4 5.10 6.1 6.6"
                 ARM_KVERS=""
                 AMD_METADATA_FILE="amd.json"
                 ARM_METADATA_FILE="arm.json"
@@ -218,11 +218,17 @@ class Test(unittest.TestCase):
         (tmpdir / "arm.json").write_text("{}\n", encoding="utf-8")
         kver_5_4 = update_kernel_afdo.KernelVersion(5, 4)
         kver_5_10 = update_kernel_afdo.KernelVersion(5, 10)
+        kver_6_1 = update_kernel_afdo.KernelVersion(6, 1)
         kver_6_6 = update_kernel_afdo.KernelVersion(6, 6)
         amd_metadata = tmpdir / "amd.json"
         update_kernel_afdo.write_afdo_descriptor_file(
             amd_metadata,
-            {kver_5_4: "old-5_4", kver_5_10: "old-5_10", kver_6_6: "old-6_6"},
+            {
+                kver_5_4: "old-5_4",
+                kver_5_10: "old-5_10",
+                kver_6_1: "old-6_1",
+                kver_6_6: "old-6_6",
+            },
         )
 
         now = datetime.datetime(2026, 11, 2, tzinfo=datetime.timezone.utc)
@@ -251,7 +257,7 @@ class Test(unittest.TestCase):
             git_utils.Channel.STABLE,
             git_utils.ChannelBranch("cros", 156, "release-R156-16836.B"),
             skipped_versions={
-                156: ((update_kernel_afdo.Arch.AMD64, kver_5_10),),
+                156: ((update_kernel_afdo.Arch.AMD64, kver_6_1),),
                 154: (amd64_6_6,),
             },
             skipped_channel_versions=(
@@ -272,6 +278,7 @@ class Test(unittest.TestCase):
             {
                 kver_5_4: "old-5_4",
                 kver_5_10: "old-5_10",
+                kver_6_1: "old-6_1",
                 kver_6_6: fresh.file_name_no_suffix,
             },
         )

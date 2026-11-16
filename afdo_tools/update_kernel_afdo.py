@@ -64,6 +64,7 @@ class KernelVersion:
 
 
 AMD64_KERNEL_5_4 = (Arch.AMD64, KernelVersion(5, 4))
+AMD64_KERNEL_5_10 = (Arch.AMD64, KernelVersion(5, 10))
 ARM_KERNEL_6_6 = (Arch.ARM, KernelVersion(6, 6))
 
 # Versions that rolling should be skipped on for a specific milestone, for one
@@ -77,10 +78,10 @@ SKIPPED_VERSIONS: dict[int, Iterable[tuple[Arch, KernelVersion]]] = {
 SKIPPED_CHANNEL_VERSIONS: dict[
     git_utils.Channel, Iterable[tuple[Arch, KernelVersion]]
 ] = {
-    # All remaining 5.4 ChromeOS boards (fizz, kalista, nami) are in Extended
+    # All remaining x86_64 5.4 and 5.10 ChromeOS boards are in Extended
     # Support, so they skip Stable and only ship on canary/dev/beta and
-    # LTC/LTS; see b/579865428.
-    git_utils.Channel.STABLE: (AMD64_KERNEL_5_4,),
+    # LTC/LTS; see b/579865428 and b/586496216.
+    git_utils.Channel.STABLE: (AMD64_KERNEL_5_4, AMD64_KERNEL_5_10),
 }
 
 
