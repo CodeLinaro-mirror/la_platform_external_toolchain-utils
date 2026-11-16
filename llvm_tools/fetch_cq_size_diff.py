@@ -44,7 +44,7 @@ class ComparableArtifact(abc.ABC):
     @property
     @abc.abstractmethod
     def artifact_name(self) -> str:
-        """Returns the name of the artifact in gs:// e.g., "image.zip"."""
+        """Returns the artifact name in gs:// (e.g., 'debug.tgz')."""
 
     @abc.abstractmethod
     def _measure_artifact_size(self, file: Path) -> int:
@@ -259,7 +259,7 @@ def find_size_diffable_cq_artifacts(
 def inspect_gs_impl(
     baseline_gs_url: str, new_gs_url: str, artifact: ComparableArtifact
 ) -> None:
-    """Compares the `image.zip`s at the given URLs, logging the results."""
+    """Compares the artifacts at the given URLs, logging the results."""
     size_diff = artifact.compare_size_from_gs(baseline_gs_url, new_gs_url)
     # `%d` doesn't support `,` as a modifier, and commas make these numbers
     # much easier to read. Prefer to keep strings interpreted as format strings
@@ -352,7 +352,7 @@ def main(argv: list[str]) -> None:
     )
     what_to_compare = parser.add_mutually_exclusive_group(required=True)
     what_to_compare.add_argument(
-        "--image", action="store_true", help="Compare image.zip sizes."
+        "--image", action="store_true", help="Compare ChromiumOS image sizes."
     )
     what_to_compare.add_argument(
         "--debuginfo", action="store_true", help="Compare debuginfo sizes."
@@ -385,7 +385,7 @@ def main(argv: list[str]) -> None:
     )
 
     gs_parser = subparsers.add_parser(
-        "gs", help="Directly compare two zip files from gs://."
+        "gs", help="Directly compare two artifacts from gs://."
     )
     gs_parser.add_argument("baseline", help="Baseline file to compare.")
     gs_parser.add_argument("new", help="New file to compare.")
