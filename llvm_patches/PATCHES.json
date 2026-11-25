@@ -1635,5 +1635,21 @@
       "from": 631994,
       "until": 647338
     }
+  },
+  {
+    "metadata": {
+      "info": [],
+      "original_sha": "29dbd3ed4bf74129f8ea1393accecabe019f7bb3",
+      "title": "[UPSTREAM] [libc++] Add _LIBCPP_NO_SANITIZE(\"cfi-unrelated-cast\") to __shared_ptr_emplace::__get_elem() (#244965)"
+    },
+    "platforms": [
+      "android",
+      "chromiumos"
+    ],
+    "rel_patch_path": "cherry/29dbd3ed4bf74129f8ea1393accecabe019f7bb3.patch",
+    "version_range": {
+      "from": 639965,
+      "until": 648488
+    }
   }
 ]
